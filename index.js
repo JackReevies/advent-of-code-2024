@@ -79,7 +79,6 @@ async function run(fn) {
 async function benchmark() {
   await downloadMissingDays()
   const fns = discoverDays()
-  console.log(fns)
 
   /** @type [{day, oneResult, oneTime, twoResult, twoTime, totalTime}] */
   const rows = []
