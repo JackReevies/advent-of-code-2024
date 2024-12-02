@@ -30,12 +30,11 @@ async function downloadMissingDays() {
   for (let i = 0; i < 25; i++) {
 
     const date = new Date(process.env.YEAR, 11, i + 1)
-    console.log(date)
     if (date.getTime() > new Date().getTime()) continue // We're in the future for this AoC year
 
     if (fs.existsSync(`./day-${i + 1}/readme.md`)) {
       const contents = fs.readFileSync(`./day-${i + 1}/readme.md`).toString()
-      if (contents.includes('## Part Two')) {
+      if (!contents.includes('Not unlocked yet - submit part 1 and re-run')) {
         continue
       }
     }
