@@ -1,6 +1,6 @@
 ## Advent of Code 2024
 
-![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-3-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-6-b5792a?style=for-the-badge)
+![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-4-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-8-b5792a?style=for-the-badge)
 
 My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
@@ -8,9 +8,10 @@ My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
 Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 -|-|-|-|-|-
-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1579939&nbsp;&nbsp;&nbsp;|0.512&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|20351745&nbsp;&nbsp;|0.527&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.038&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|402&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.215&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|455&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|7.447&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|9.662&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|187194524&nbsp;|0.201&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|127092535&nbsp;|0.599&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1579939&nbsp;&nbsp;&nbsp;|0.913&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|20351745&nbsp;&nbsp;|0.852&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.764&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|402&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3.785&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|455&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|13.983&nbsp;&nbsp;&nbsp;&nbsp;|17.768&nbsp;&nbsp;&nbsp;&nbsp;
+3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|187194524&nbsp;|0.344&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|127092535&nbsp;|1.343&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.687&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2578&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.756&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1972&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3.862&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6.618&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <br />
 
