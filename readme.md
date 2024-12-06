@@ -8,12 +8,12 @@ My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
 Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 -|-|-|-|-|-
-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1579939&nbsp;&nbsp;&nbsp;|0.577&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|20351745&nbsp;&nbsp;|0.561&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.138&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|402&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3.051&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|455&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|9.924&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|12.975&nbsp;&nbsp;&nbsp;&nbsp;
-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|187194524&nbsp;|0.305&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|127092535&nbsp;|1.001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.306&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2578&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.757&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1972&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.493&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4.25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4766&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.631&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6257&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|5.798&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|8.429&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4939&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.237&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1434&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2824.686&nbsp;&nbsp;|2826.923&nbsp;&nbsp;
+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1579939&nbsp;&nbsp;&nbsp;|0.523&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|20351745&nbsp;&nbsp;|0.529&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.052&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|402&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.254&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|455&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|7.411&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|9.664&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|187194524&nbsp;|0.206&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|127092535&nbsp;|0.607&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.813&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2578&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.475&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1972&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.983&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3.458&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4766&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2.552&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6257&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4.426&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6.977&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4939&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.206&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1434&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|522.756&nbsp;&nbsp;&nbsp;|522.962&nbsp;&nbsp;&nbsp;
 
 <br />
 

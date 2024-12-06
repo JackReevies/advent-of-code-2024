@@ -2,7 +2,6 @@ const { timeFunction, getInput, getAdjacent4 } = require('../common')
 
 function partOne(numbers) {
   const grid = numbers.map(line => line.split(''))
-  const dirGrid = grid.map(line => line.map(o => []))
 
   let guardDir = { x: 0, y: -1, char: '^' }
   let guardPos = grid.reduce((acc, obj, i) => {
@@ -16,11 +15,11 @@ function partOne(numbers) {
 
   grid[guardPos.y][guardPos.x] = 'X'
 
-  const ans = solveLoop(grid, guardPos, guardDir, dirGrid)
+  const ans = solveLoop(grid, guardPos, guardDir)
   return ans
 }
 
-function solveLoop(grid, guardPos, guardDir, dirGrid, maxIterations = Number.MAX_SAFE_INTEGER) {
+function solveLoop(grid, guardPos, guardDir, maxIterations = Number.MAX_SAFE_INTEGER) {
   for (let i = 0; i < maxIterations; i++) {
     // If there is something directly in front of you, turn right 90 degrees.
     // Otherwise, take a step forward.
@@ -40,7 +39,6 @@ function solveLoop(grid, guardPos, guardDir, dirGrid, maxIterations = Number.MAX
       guardPos.y = nextPos.y
 
       grid[nextPos.y][nextPos.x] = 'X'
-      dirGrid[nextPos.y][nextPos.x].push(guardDir.char)
 
       continue
     }
@@ -77,7 +75,7 @@ function partTwo(numbers) {
     const copyGrid = grid.map(line => line.slice())
     const copyDirGrid = dirGrid.map(line => line.map(o => o.map(o => o.slice())))
     const copyGuardPos = { x: guardPos.x, y: guardPos.y }
-    const copyGuardDir = { x: guardDir.x, y: guardDir.y, char: guardDir.char }
+    //const copyGuardDir = { x: guardDir.x, y: guardDir.y, char: guardDir.char }
 
     const newObstacle = findPotentialObstacle(copyGrid, copyGuardPos, copyGuardDir, copyDirGrid, potentialObstacles)
 
@@ -100,7 +98,7 @@ function partTwo(numbers) {
   debugger
 }
 
-function findPotentialObstacle(grid, guardPos, guardDir, dirGrid, potentialObstacles) {
+function findPotentialObstacle(grid, guardPos, guardDir, potentialObstacles) {
   while (true) {
     // If there is something directly in front of you, turn right 90 degrees.
     // Otherwise, take a step forward.
@@ -158,14 +156,11 @@ function findPotentialObstacle(grid, guardPos, guardDir, dirGrid, potentialObsta
       guardPos.y = nextPos.y
 
       grid[nextPos.y][nextPos.x] = 'X'
-      dirGrid[nextPos.y][nextPos.x].push(guardDir.char)
-
       continue
     }
 
     // There is something in front, turn right
     guardDir = getRotation(guardDir)
-    dirGrid[guardPos.y][guardPos.x].push(guardDir.char)
   }
 }
 
@@ -183,7 +178,6 @@ function getRotation(guardDir) {
 
 function partTwoBrute(numbers) {
   const grid = numbers.map(line => line.split(''))
-  const dirGrid = grid.map(line => line.map(o => []))
 
   let guardDir = { x: 0, y: -1, char: '^' }
   let guardPos = grid.reduce((acc, obj, i) => {
@@ -198,13 +192,12 @@ function partTwoBrute(numbers) {
   grid[guardPos.y][guardPos.x] = 'X'
 
   const originalGrid = grid.map(line => line.slice())
-  const originalDirGrid = dirGrid.map(line => line.map(o => o.slice()))
   const originalGuardPos = { x: guardPos.x, y: guardPos.y }
   const originalGuardDir = { x: guardDir.x, y: guardDir.y }
 
-  const ans = solveLoop(grid, guardPos, guardDir, dirGrid)
+  solveLoop(grid, guardPos, guardDir)
   const troddenCoords = grid.reduce((acc, line, iY) => {
-    const ys = line.forEach((c, i) => {
+    line.forEach((c, i) => {
       if (c === 'X') {
         acc.push({ x: i, y: iY })
       }
@@ -214,7 +207,6 @@ function partTwoBrute(numbers) {
 
   const obstacles = {}
 
-  let attempts = 0
   for (const troddenCoord of troddenCoords) {
     if (troddenCoord.x === originalGuardPos.x && troddenCoord.y === originalGuardPos.y) {
       // Can't put an obstacle on the starting position
@@ -226,19 +218,15 @@ function partTwoBrute(numbers) {
     const copyGuardPos = { x: originalGuardPos.x, y: originalGuardPos.y }
     const copyGuardDir = { x: originalGuardDir.x, y: originalGuardDir.y }
 
-    attempts++
-    const res = solveLoop(moddedGrid, copyGuardPos, copyGuardDir, originalDirGrid, 10000)
+    const res = solveLoop(moddedGrid, copyGuardPos, copyGuardDir, 6000)
 
     if (!res) {
       // We found a valid obstacle
       //console.log(`Found obstacle at ${adjacent.x}, ${adjacent.y}`)
       obstacles[`${troddenCoord.x}, ${troddenCoord.y}`] = true
     }
-
   }
 
-  //console.log(`Attempts: ${attempts}`)
-  //console.log(Object.keys(obstacles).length)
   return Object.keys(obstacles).length
 }
 
@@ -251,3 +239,4 @@ async function start() {
 }
 
 module.exports = start
+// start()
