@@ -214,32 +214,31 @@ function partTwoBrute(numbers) {
 
   const obstacles = {}
 
+  let attempts = 0
   for (const troddenCoord of troddenCoords) {
-    const adjacents = getAdjacent4(originalGrid, troddenCoord.x, troddenCoord.y)
-    adjacents.push(troddenCoord)
-
-    for (const adjacent of adjacents) {
-      if (adjacent.x === originalGuardPos.x && adjacent.y === originalGuardPos.y) {
-        // Can't put an obstacle on the starting position
-        continue
-      }
-
-      const moddedGrid = originalGrid.map(line => line.slice())
-      moddedGrid[adjacent.y][adjacent.x] = '#'
-      const copyGuardPos = { x: originalGuardPos.x, y: originalGuardPos.y }
-      const copyGuardDir = { x: originalGuardDir.x, y: originalGuardDir.y }
-
-      const res = solveLoop(moddedGrid, copyGuardPos, copyGuardDir, originalDirGrid, 10000)
-
-      if (!res) {
-        // We found a valid obstacle
-        //console.log(`Found obstacle at ${adjacent.x}, ${adjacent.y}`)
-        obstacles[`${adjacent.x}, ${adjacent.y}`] = true
-      }
+    if (troddenCoord.x === originalGuardPos.x && troddenCoord.y === originalGuardPos.y) {
+      // Can't put an obstacle on the starting position
+      continue
     }
 
+    const moddedGrid = originalGrid.map(line => line.slice())
+    moddedGrid[troddenCoord.y][troddenCoord.x] = '#'
+    const copyGuardPos = { x: originalGuardPos.x, y: originalGuardPos.y }
+    const copyGuardDir = { x: originalGuardDir.x, y: originalGuardDir.y }
+
+    attempts++
+    const res = solveLoop(moddedGrid, copyGuardPos, copyGuardDir, originalDirGrid, 10000)
+
+    if (!res) {
+      // We found a valid obstacle
+      //console.log(`Found obstacle at ${adjacent.x}, ${adjacent.y}`)
+      obstacles[`${troddenCoord.x}, ${troddenCoord.y}`] = true
+    }
 
   }
+
+  //console.log(`Attempts: ${attempts}`)
+  //console.log(Object.keys(obstacles).length)
   return Object.keys(obstacles).length
 }
 
@@ -247,7 +246,6 @@ async function start() {
   const numbers = getInput(`${__dirname}/input.txt`)
 
   const task1 = await timeFunction(() => partOne(numbers))
-  console.log(task1)
   const task2 = await timeFunction(() => partTwoBrute(numbers))
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
