@@ -75,7 +75,29 @@ async function run(fn) {
   return { result: [{ ans: ans[0], ms: avg[0] }, { ans: ans[1], ms: avg[1] }], ms: avg[0] + avg[1], min, max }
 }
 
-async function benchmark() {
+async function readOldData() {
+  const data = fs.readFileSync('readme.md').toString()
+  const regex = /([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*/g
+  const matches = data.matchAll(regex)
+  if (!matches) return []
+
+  const days = []
+  for (const match of matches) {
+    days.push({
+      day: match[1],
+      oneResult: match[2],
+      oneTime: match[3],
+      twoResult: match[4],
+      twoTime: match[5],
+      totalTime: match[6]
+    })
+  }
+
+  return days
+}
+
+async function benchmark(full = false) {
+  const existing = full ? [] : await readOldData()
   await downloadMissingDays()
   const fns = discoverDays()
 
@@ -86,6 +108,23 @@ async function benchmark() {
 
   for (let i = 0; i < fns.length; i++) {
     const fn = fns[i]
+
+    if (!full && existing.find(o => o.day == (i + 1).toString())) {
+      try {
+        const cachedDay = existing.find(o => o.day == (i + 1).toString())
+        rows.push({
+          day: cachedDay.day.padEnd(8, ' '),
+          oneResult: cachedDay.oneResult.toString().padEnd(10, ' '),
+          oneTime: cachedDay.oneTime.toString().padEnd(10, ' '),
+          twoResult: cachedDay.twoResult.toString().padEnd(10, ' '),
+          twoTime: cachedDay.twoTime.toString().padEnd(10, ' '),
+          totalTime: cachedDay.totalTime.toString().padEnd(10, ' ')
+        })
+        continue
+      } catch (e) {
+        console.error(e)
+      }
+    }
 
     if (new Date(process.env.YEAR, 11, i + 1).getTime() > new Date().getTime()) continue // We're in the future for this AoC year
     if (fn === undefined) continue // Nothing to run means it cannot be correct
@@ -146,6 +185,10 @@ async function benchmark() {
 }
 
 async function start() {
+  if (process.argv[2]?.toLowerCase() === 'benchmark') {
+    return benchmark(true)
+  }
+
   if (process.argv[2]?.toLowerCase() === 'download') {
     return await setupDay(process.argv[3])
   }
@@ -154,7 +197,7 @@ async function start() {
     return console.log(await getAnswersForDay(process.argv[3]))
   }
 
-  benchmark()
+  benchmark(false)
 }
 
 start()
