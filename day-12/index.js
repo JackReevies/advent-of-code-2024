@@ -111,7 +111,7 @@ function partOne(numbers) {
 
 
   // drawTransposedGrid(mapFences)
-  console.log(ans)
+  //console.log(ans)
   return ans
 }
 
@@ -573,7 +573,7 @@ function partTwo(numbers) {
 
 
   // drawTransposedGrid(mapFences)
-  console.log(ans)
+  //console.log(ans)
   return ans
 }
 

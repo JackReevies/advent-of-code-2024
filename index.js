@@ -112,6 +112,7 @@ async function benchmark(full = false) {
     if (!full && existing.find(o => o.day == (i + 1).toString())) {
       try {
         const cachedDay = existing.find(o => o.day == (i + 1).toString())
+        stars += 2
         rows.push({
           day: cachedDay.day.padEnd(8, ' '),
           oneResult: cachedDay.oneResult.toString().padEnd(10, ' '),
@@ -120,6 +121,13 @@ async function benchmark(full = false) {
           twoTime: cachedDay.twoTime.toString().padEnd(10, ' '),
           totalTime: cachedDay.totalTime.toString().padEnd(10, ' ')
         })
+        if (cachedDay.oneResult.includes('❌')) {
+          stars--
+        }
+
+        if (cachedDay.twoResult.includes('❌')) {
+          stars--
+        }
         continue
       } catch (e) {
         console.error(e)
