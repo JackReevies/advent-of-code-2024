@@ -114,6 +114,7 @@ async function benchmark(full = false) {
 
     if (cached) {
       stars += 2
+      maxDay = i + 1
       rows.push({
         day: cached.day.padEnd(8, ' '),
         oneResult: cached.oneResult.toString().padEnd(10, ' '),
