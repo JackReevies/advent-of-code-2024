@@ -1,0 +1,47 @@
+861888 - too low
+883147 - too low
+949673 - too low
+
+964702 - unknown
+
+999673 - unknown
+
++-++-++-++-++-+
+|E  E  E  E  E|
++  +-++-++-++-+
++  +-++-++-++-+
+|E |X  X  X  X|
++  +-++-++-++-+
++  +-++-++-++-+
+|E  E  E  E  E|
++  +-++-++-++-+
++  +-++-++-++-+
+|E |X  X  X  X|
++  +-++-++-++-+
++  +-++-++-++-+
+|E  E  E  E  E|
++-++-++-++-++-+
+
++-++-++-++-++-+
+|E  E  E  E  E|
++  +-++-++-++-+
++  +
+|E |
++  +
++  +-++-++-++-+
+|E  E  E  E  E|
++  +-++-++-++-+
++  +
+|E |
++  +
++  +-++-++-++-+
+|E  E  E  E  E|
++-++-++-++-++-+
+
+If you want some hints:
+
+The number of sides is also the number of corners
+
+There are only 8 possible ways that any given square can be a corner, so you don't need to overthink the check
+
+Because the fences don't intersect, you don't actually care whether a cell of the same plant is part of the same region or not

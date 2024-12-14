@@ -1,6 +1,6 @@
 ## Advent of Code 2024
 
-![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-12-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-23-b5792a?style=for-the-badge)
+![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-12-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-28-b5792a?style=for-the-badge)
 
 My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
@@ -19,7 +19,9 @@ Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6337367222422|732.188&nbsp;&nbsp;&nbsp;|6361380647183|16226.449&nbsp;|16958.637&nbsp;
 10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|659&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|5.905&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1463&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|5.905&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|199986&nbsp;&nbsp;&nbsp;&nbsp;|3.589&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|236804088748754|121.585&nbsp;&nbsp;&nbsp;|125.174&nbsp;&nbsp;&nbsp;
-12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1522850&nbsp;&nbsp;&nbsp;|990.809&nbsp;&nbsp;&nbsp;|❌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|990.809&nbsp;&nbsp;&nbsp;
+12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1522850&nbsp;&nbsp;&nbsp;|1155.172&nbsp;&nbsp;|953738&nbsp;&nbsp;&nbsp;&nbsp;|1178.015&nbsp;&nbsp;|2333.187&nbsp;&nbsp;
+13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|29711&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6.235&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|94955433618919|0.23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6.466&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|216772608&nbsp;|2.05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6888&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|394.268&nbsp;&nbsp;&nbsp;|396.317&nbsp;&nbsp;&nbsp;
 
 <br />
 

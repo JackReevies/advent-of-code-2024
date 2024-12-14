@@ -83,6 +83,7 @@ async function readOldData() {
 
   const days = []
   for (const match of matches) {
+    if (match.find(o => o.includes('❌'))) continue
     days.push({
       day: match[1],
       oneResult: match[2],
@@ -109,75 +110,64 @@ async function benchmark(full = false) {
   for (let i = 0; i < fns.length; i++) {
     const fn = fns[i]
 
-    if (!full && existing.find(o => o.day == (i + 1).toString())) {
-      try {
-        const cachedDay = existing.find(o => o.day == (i + 1).toString())
-        stars += 2
-        rows.push({
-          day: cachedDay.day.padEnd(8, ' '),
-          oneResult: cachedDay.oneResult.toString().padEnd(10, ' '),
-          oneTime: cachedDay.oneTime.toString().padEnd(10, ' '),
-          twoResult: cachedDay.twoResult.toString().padEnd(10, ' '),
-          twoTime: cachedDay.twoTime.toString().padEnd(10, ' '),
-          totalTime: cachedDay.totalTime.toString().padEnd(10, ' ')
-        })
-        if (cachedDay.oneResult.includes('❌')) {
-          stars--
-        }
+    const cached = existing.find(o => o.day == (i + 1).toString())
 
-        if (cachedDay.twoResult.includes('❌')) {
-          stars--
+    if (cached) {
+      stars += 2
+      rows.push({
+        day: cached.day.padEnd(8, ' '),
+        oneResult: cached.oneResult.toString().padEnd(10, ' '),
+        oneTime: cached.oneTime.toString().padEnd(10, ' '),
+        twoResult: cached.twoResult.toString().padEnd(10, ' '),
+        twoTime: cached.twoTime.toString().padEnd(10, ' '),
+        totalTime: cached.totalTime.toString().padEnd(10, ' ')
+      })
+    } else {
+      if (new Date(process.env.YEAR, 11, i + 1).getTime() > new Date().getTime()) continue // We're in the future for this AoC year
+      if (fn === undefined) continue // Nothing to run means it cannot be correct
+
+      const expected = await answers(i)
+      const actual = fn ? await run(fn) : { result: [NaN, NaN], ms: 0, min: [0], max: [0] }
+
+      const dayBlurb = `Day ${i + 1} (${Math.round(actual.ms * 100) / 100} ms)`
+
+      console.log(''.padStart(dayBlurb.length, '='))
+      console.log(dayBlurb)
+      console.log(''.padStart(dayBlurb.length, '-'))
+
+      const byTask = expected.map((val, i) => {
+        const actualResult = actual.result[i]
+        if (actualResult.ans === undefined) {
+          console.log(`Task ${i + 1} has no solution`)
+          return false
         }
-        continue
-      } catch (e) {
-        console.error(e)
-      }
+        if (val == actualResult.ans && val !== undefined) {
+          console.log(`Task ${i + 1} is Correct (${val}) (took ${Math.round(actualResult.ms * 100) / 100}ms)`)
+          stars++
+          return true
+        } else {
+          console.error(`Task ${i + 1} is Wrong (expected ${val} but got ${actualResult.ans}) (took ${Math.round(actualResult.ms * 100) / 100}ms)`)
+        }
+      })
+      console.log('\n'.padStart(dayBlurb.length, '='))
+      maxDay = i + 1
+
+      const p1Result = byTask[0] ? actual.result[0].ans : '❌'
+      const p1Time = byTask[0] ? Math.round(actual.result[0].ms * 1000) / 1000 : 0
+      const p2Result = byTask[1] ? actual.result[1].ans : '❌'
+      const p2Time = byTask[1] ? Math.round(actual.result[1].ms * 1000) / 1000 : 0
+
+      const totalTime = byTask[0] && byTask[1] ? Math.round(actual.ms * 1000) / 1000 : byTask[0] ? p1Time : 0
+
+      rows.push({
+        day: (i + 1).toString().padEnd(8, ' '),
+        oneResult: p1Result.toString().padEnd(10, ' '),
+        oneTime: p1Time.toString().padEnd(10, ' '),
+        twoResult: p2Result.toString().padEnd(10, ' '),
+        twoTime: p2Time.toString().padEnd(10, ' '),
+        totalTime: totalTime.toString().padEnd(10, ' ')
+      })
     }
-
-    if (new Date(process.env.YEAR, 11, i + 1).getTime() > new Date().getTime()) continue // We're in the future for this AoC year
-    if (fn === undefined) continue // Nothing to run means it cannot be correct
-
-    const expected = await answers(i)
-    const actual = fn ? await run(fn) : { result: [NaN, NaN], ms: 0, min: [0], max: [0] }
-
-    const dayBlurb = `Day ${i + 1} (${Math.round(actual.ms * 100) / 100} ms)`
-
-    console.log(''.padStart(dayBlurb.length, '='))
-    console.log(dayBlurb)
-    console.log(''.padStart(dayBlurb.length, '-'))
-
-    const byTask = expected.map((val, i) => {
-      const actualResult = actual.result[i]
-      if (actualResult.ans === undefined) {
-        console.log(`Task ${i + 1} has no solution`)
-        return false
-      }
-      if (val == actualResult.ans && val !== undefined) {
-        console.log(`Task ${i + 1} is Correct (${val}) (took ${Math.round(actualResult.ms * 100) / 100}ms)`)
-        stars++
-        return true
-      } else {
-        console.error(`Task ${i + 1} is Wrong (expected ${val} but got ${actualResult.ans}) (took ${Math.round(actualResult.ms * 100) / 100}ms)`)
-      }
-    })
-    console.log('\n'.padStart(dayBlurb.length, '='))
-    maxDay = i + 1
-
-    const p1Result = byTask[0] ? actual.result[0].ans : '❌'
-    const p1Time = byTask[0] ? Math.round(actual.result[0].ms * 1000) / 1000 : 0
-    const p2Result = byTask[1] ? actual.result[1].ans : '❌'
-    const p2Time = byTask[1] ? Math.round(actual.result[1].ms * 1000) / 1000 : 0
-
-    const totalTime = byTask[0] && byTask[1] ? Math.round(actual.ms * 1000) / 1000 : byTask[0] ? p1Time : 0
-
-    rows.push({
-      day: (i + 1).toString().padEnd(8, ' '),
-      oneResult: p1Result.toString().padEnd(10, ' '),
-      oneTime: p1Time.toString().padEnd(10, ' '),
-      twoResult: p2Result.toString().padEnd(10, ' '),
-      twoTime: p2Time.toString().padEnd(10, ' '),
-      totalTime: totalTime.toString().padEnd(10, ' ')
-    })
   }
 
   const tableBody = rows.map(o => Object.values(o).map(o => o.toString().replace(/ /g, '&nbsp;')).join('|')).join(`\n`)

@@ -515,41 +515,84 @@ function partTwo(numbers) {
   for (const group of Object.keys(groups)) {
     const char = group
     const groupData = groups[char]
+    let corners = 0
 
     for (const cell of Object.values(groupData)) {
       if (!cell.fences) {
         cell.fences = []
       }
 
+      cell.up = !!groupData[`${cell.x}, ${cell.y - 1}`]
+      cell.down = !!groupData[`${cell.x}, ${cell.y + 1}`]
+      cell.left = !!groupData[`${cell.x - 1}, ${cell.y}`]
+      cell.right = !!groupData[`${cell.x + 1}, ${cell.y}`]
+      cell.upRight = !!groupData[`${cell.x + 1}, ${cell.y - 1}`]
+      cell.downRight = !!groupData[`${cell.x + 1}, ${cell.y + 1}`]
+      cell.upLeft = !!groupData[`${cell.x - 1}, ${cell.y - 1}`]
+      cell.downLeft = !!groupData[`${cell.x - 1}, ${cell.y + 1}`]
+
       // Should this cell have a fence above?
-      if (groupData[`${cell.x}, ${cell.y - 1}`]) {
-        // No, because theres another plant directly above it
-      } else {
+      if (!cell.up) {
         cell.fences.push({ coord: `${cell.x}, ${cell.y - 1}`, x: cell.x, y: cell.y - 1, char: '-', ocX: cell.x, ocY: cell.y, ocChar: char[0] })
       }
 
       // Should this cell have a fence below?
-      if (groupData[`${cell.x}, ${cell.y + 1}`]) {
-        // No, because theres another plant directly below it
-      } else {
+      if (!cell.down) {
         cell.fences.push({ coord: `${cell.x}, ${cell.y + 1}`, x: cell.x, y: cell.y + 1, char: '-', ocX: cell.x, ocY: cell.y, ocChar: char[0] })
       }
 
       // Should this cell have a fence to the left?
-      if (groupData[`${cell.x - 1}, ${cell.y}`]) {
-        // No, because theres another plant directly to the left of it
-      } else {
+      if (!cell.left) {
         cell.fences.push({ coord: `${cell.x - 1}, ${cell.y}`, x: cell.x - 1, y: cell.y, char: '|', ocX: cell.x, ocY: cell.y, ocChar: char[0] })
       }
 
       // Should this cell have a fence to the right?
-      if (groupData[`${cell.x + 1}, ${cell.y}`]) {
-        // No, because theres another plant directly to the right of it
-      } else {
+      if (!cell.right) {
         cell.fences.push({ coord: `${cell.x + 1}, ${cell.y}`, x: cell.x + 1, y: cell.y, char: '|', ocX: cell.x, ocY: cell.y, ocChar: char[0] })
       }
 
-      //cell.fences = cell.fences ? Object.keys(cell.fences) : []
+      if (cell.fences.length === 4) {
+        corners += 4
+      } else if (cell.fences.length === 3) {
+        corners += 2
+      } else if (cell.fences.length === 2) {
+        if (cell.up && cell.right) {
+          corners += cell.upRight ? 1 : 2
+        }
+        else if (cell.right && cell.down) {
+          corners += cell.downRight ? 1 : 2
+        }
+        else if (cell.down && cell.left) {
+          corners += cell.downLeft ? 1 : 2
+        }
+        else if (cell.left && cell.up) {
+          corners += cell.upLeft ? 1 : 2
+        }
+      } else if (cell.fences.length === 1) {
+        const map = {
+          'up': ['downRight', 'downLeft'],
+          'right': ['upLeft', 'downLeft'],
+          'down': ['upRight', 'upLeft'],
+          'left': ['upRight', 'downRight']
+        }
+
+        Object.keys(map).forEach(missingDirection => {
+          if (!cell[missingDirection]) {
+            map[missingDirection].forEach(direction => {
+              if (!cell[direction]) {
+                corners += 1
+              }
+            })
+          }
+        })
+      } else if (cell.fences.length === 0) {
+        const diags = ['upRight', 'downRight', 'upLeft', 'downLeft']
+        diags.forEach(diag => {
+          if (!cell[diag]) {
+            corners += 1
+          }
+        })
+      }
     }
 
     const area = getAreaOfGroup(groupData)
@@ -562,13 +605,9 @@ function partTwo(numbers) {
 
     // drawFencesOnGrid(JSON.parse(JSON.stringify(groupData)), 2)
 
-    const sides = getSidesOfGroupOld(char[0], allFences)
-
-
-
     // console.log(`${char}: ${area} area, ${perimeter} perimeter = ${area * perimeter}`)
-    //console.log(`${char}: ${area} area, ${sides} sides = ${area * sides} `)
-    ans += area * sides
+    //console.log(`${char}: ${area} area, ${corners} sides = ${area * corners} `)
+    ans += area * corners
   }
 
 
@@ -584,6 +623,5 @@ async function start() {
   const task2 = await timeFunction(() => partTwo(numbers))
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
-
 module.exports = start
 start()

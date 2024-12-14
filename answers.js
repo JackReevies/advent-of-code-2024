@@ -21,7 +21,7 @@ async function getAnswers(day) {
     try { readAnswers() } catch (e) { }
   }
 
-  if (answers[day - 1]) {
+  if (answers[day - 1] && !answers[day - 1].some(o => o === null || o === undefined)) {
     return answers[day - 1]
   }
 
