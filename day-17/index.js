@@ -103,6 +103,7 @@ function resolveComboArg(registers, arg) {
 }
 
 function partTwo(registers, program) {
+  return 0
   const programStr = program.join(',')
   const start = Date.now()
   let last = Date.now()
@@ -143,4 +144,3 @@ async function start() {
 }
 
 module.exports = start
-start()

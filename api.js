@@ -48,7 +48,7 @@ async function getAnswersForDay(day) {
   const text = await makeApiRequest(getUrl(day))
 
   const ans = []
-  for (const obj of text.matchAll(/Your puzzle answer was <code>(\d+)<\/code>/g)) {
+  for (const obj of text.matchAll(/Your puzzle answer was <code>(.*?)<\/code>/g)) {
     ans.push(obj[1])
   }
 
