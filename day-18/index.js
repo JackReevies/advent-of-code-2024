@@ -12,7 +12,7 @@ function partOne(numbers) {
     }
   }
 
-  for (let i = 0; i < 1025; i++) {
+  for (let i = 0; i < 1725; i++) {
     const coord = numbers[i]
     const [x, y] = coord.split(',').map(o => parseInt(o))
     grid[y][x] = '#'
@@ -22,43 +22,32 @@ function partOne(numbers) {
 }
 
 function minPath(grid, x, y, x2, y2) {
-  const cells = [{ x: x, y: y, direction: '>', score: 0 }]
+  const cells = [{ x: x, y: y, score: 0 }]
   const cache = {}
 
   while (cells.length) {
     cells.sort((a, b) => a.score - b.score)
 
     const cell = cells.shift()
-    const { x, y, score, direction } = cell
+    const { x, y, score } = cell
 
     if (y == y2 && x == x2) {
       return score
     }
 
-    if (cache[`${x},${y},${direction}`]) {
+    if (cache[`${x},${y}`]) {
       continue
     }
 
-    cache[`${x},${y},${direction}`] = true
+    cache[`${x},${y}`] = true
 
-    const adjacents = getAdjacent4(grid, x, y)
-      .filter(c => c.char !== '#')
-      .map(o => {
-        return {
-          ...o,
-          ...getPentaltyForMovement(x, y, o.x, o.y, direction)
-        }
-      })
+    const adjacents = getAdjacent4(grid, x, y).filter(c => c.char !== '#')
 
     for (const adjacent of adjacents) {
-      cells.push({ x: adjacent.x, y: adjacent.y, score: adjacent.score + score, direction: adjacent.newDirection })
+      cells.push({ x: adjacent.x, y: adjacent.y, score: 1 + score })
     }
   }
 
-}
-
-function getPentaltyForMovement() {
-  return { score: 1, newDirection: '>' }
 }
 
 function partTwo(numbers) {

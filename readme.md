@@ -25,7 +25,7 @@ Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1414416&nbsp;&nbsp;&nbsp;|0.988&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1386070&nbsp;&nbsp;&nbsp;|3.242&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4.23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|109496&nbsp;&nbsp;&nbsp;&nbsp;|416.461&nbsp;&nbsp;&nbsp;|551&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|36533.878&nbsp;|36950.339&nbsp;
 17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6,1,6,4,2,4,7,3,5|0.01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|❌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|302&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|41.515&nbsp;&nbsp;&nbsp;&nbsp;|24,32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|35.17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|76.685&nbsp;&nbsp;&nbsp;&nbsp;
+18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|302&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|18.345&nbsp;&nbsp;&nbsp;&nbsp;|24,32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|35.252&nbsp;&nbsp;&nbsp;&nbsp;|53.597&nbsp;&nbsp;&nbsp;&nbsp;
 
 <br />
 
