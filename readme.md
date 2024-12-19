@@ -1,6 +1,6 @@
 ## Advent of Code 2024
 
-![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-18-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-36-b5792a?style=for-the-badge)
+![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-19-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-38-b5792a?style=for-the-badge)
 
 My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
@@ -24,8 +24,9 @@ Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|216772608&nbsp;|2.05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6888&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|394.268&nbsp;&nbsp;&nbsp;|396.317&nbsp;&nbsp;&nbsp;
 15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1414416&nbsp;&nbsp;&nbsp;|0.988&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1386070&nbsp;&nbsp;&nbsp;|3.242&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|4.23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|109496&nbsp;&nbsp;&nbsp;&nbsp;|416.461&nbsp;&nbsp;&nbsp;|551&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|36533.878&nbsp;|36950.339&nbsp;
-17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6,1,6,4,2,4,7,3,5|0.018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|202975183645226|1.724&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.742&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|302&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|17.36&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|24,32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|32.874&nbsp;&nbsp;&nbsp;&nbsp;|50.234&nbsp;&nbsp;&nbsp;&nbsp;
+17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6,1,6,4,2,4,7,3,5|0.018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|202975183645226|1.741&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.759&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|302&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|16.778&nbsp;&nbsp;&nbsp;&nbsp;|24,32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|31.902&nbsp;&nbsp;&nbsp;&nbsp;|48.68&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|365&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|110.353&nbsp;&nbsp;&nbsp;|730121486795169|324.583&nbsp;&nbsp;&nbsp;|434.936&nbsp;&nbsp;&nbsp;
 
 <br />
 
