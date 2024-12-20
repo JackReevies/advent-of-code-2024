@@ -77,7 +77,7 @@ async function run(fn) {
 
 async function readOldData() {
   const data = fs.readFileSync('readme.md').toString()
-  const regex = /([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*/g
+  const regex = /([\d.]+)(?:&nbsp;)*\|(.*?)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|(.*?)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*\|([\d.]+)(?:&nbsp;)*/g
   const matches = data.matchAll(regex)
   if (!matches) return []
 
