@@ -2,6 +2,103 @@ const { timeFunction, getInput, getAdjacent4 } = require('../common')
 
 const globalCache = {}
 
+function buildCache() {
+  const grid = [
+    [' ', '^', 'A'],
+    ['<', 'v', '>']
+  ]
+
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[y].length; x++) {
+      if (grid[y][x] === ' ') {
+        continue
+      }
+
+      const char1 = grid[y][x]
+
+      for (let y2 = 0; y2 < grid.length; y2++) {
+        for (let x2 = 0; x2 < grid[y2].length; x2++) {
+          if (grid[y2][x2] === ' ') {
+            continue
+          }
+
+          const char2 = grid[y2][x2]
+
+          const dirs = minPath(grid, x, y, char2)
+          for (const o of dirs) {
+            const key = getCacheKey(char1, char2)
+            if (!globalCache[key]) {
+              globalCache[key] = []
+            }
+
+            globalCache[key].push(o.score.join('') + 'A')
+          }
+        }
+      }
+    }
+  }
+
+  for (let y = grid.length - 1; y >= 0; y--) {
+    for (let x = grid[y].length - 1; x >= 0; x--) {
+      if (grid[y][x] === ' ') {
+        continue
+      }
+
+      const char1 = grid[y][x]
+
+      for (let y2 = 0; y2 < grid.length; y2++) {
+        for (let x2 = 0; x2 < grid[y2].length; x2++) {
+          if (grid[y2][x2] === ' ') {
+            continue
+          }
+
+          const char2 = grid[y2][x2]
+
+          const dirs = minPath(grid, x, y, char2)
+          for (const o of dirs) {
+            const key = `${char1}-${char2}`
+            if (!globalCache[key]) {
+              globalCache[key] = []
+            }
+
+            globalCache[key].push(o.score.join('') + 'A')
+          }
+        }
+      }
+    }
+  }
+}
+function enterCodeOnIntermidiateKeypadTwo(partialCode, cache = {}) {
+  if (partialCode === "") {
+    return 1
+  } else if (cache[partialCode]) {
+    return cache[partialCode]
+  }
+
+  let path = enterCodeOnIntermidiateKeypadTwo(partialCode.substring(1), cache)
+  const prefix = cache[`${partialCode[0]}${partialCode[1]}`]
+
+  for (const o of path) {
+    if (!cache[partialCode]) {
+      cache[partialCode] = []
+    }
+
+    for (const p of prefix) {
+      cache[partialCode].push(`${p}${o}`)
+    }
+  }
+
+  // Trim cache - only keep the shrotest routes
+  const shortes = Object.values(cache[partialCode]).reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
+  Object.values(cache[partialCode]).forEach(o => {
+    if (o.length !== shortes) {
+      delete cache[partialCode][o]
+    }
+  })
+
+  return cache[partialCode]
+}
+
 function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infinity) {
   const chars = code.toString().split('')
 
@@ -21,16 +118,16 @@ function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infi
   ]
 
   let path = []
-  let paths = []
+  let paths = {}
 
   let x = 2
   let y = 0
 
   let queue = []
 
-  const res = minPath(grid, x, y, chars[0])
+  const res = globalCache[`A-${chars[0]}`]
 
-  res.forEach(o => queue.push({ fromChar: chars[0], fromCharIndex: 0, nextChar: chars[1], nextCharIndex: 1, state: o, path: [...o.path], score: [...o.score] }))
+  res.forEach(o => queue.push({ fromChar: chars[0], fromCharIndex: 0, nextChar: chars[1], nextCharIndex: 1, state: o, score: [...o] }))
   let bestSoFar = shortest
   while (queue.length) {
     queue.sort((a, b) => b.fromCharIndex - a.fromCharIndex)
@@ -42,20 +139,24 @@ function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infi
 
     if (!item.nextChar) {
       // Finished
-      paths.push(item)
+      paths[item.score.join('')] = item.score.length
       bestSoFar = Math.min(bestSoFar, item.score.length)
       if (allowSpace) {
         return paths.map(o => o.score.join('') + 'A')
       }
+      continue
     }
 
-    const dirs = minPath(grid, item.state.x, item.state.y, item.nextChar)
+    const dirs = globalCache[getCacheKey(item.fromChar, item.nextChar)] // minPath(grid, item.state.x, item.state.y, item.nextChar)
 
-    dirs.forEach(o => queue.push({ fromChar: item.nextChar, fromCharIndex: item.nextCharIndex, nextChar: chars[item.nextCharIndex + 1], nextCharIndex: item.nextCharIndex + 1, state: o, path: [...item.path, ...o.path], score: [...item.score, 'A', ...o.score] }))
+    dirs.forEach(o => queue.push({ fromChar: item.nextChar, fromCharIndex: item.nextCharIndex, nextChar: chars[item.nextCharIndex + 1], nextCharIndex: item.nextCharIndex + 1, score: [...item.score, ...o] }))
   }
 
+  return Object.keys(paths).filter(o => paths[o] === bestSoFar)
+}
 
-  return paths.map(o => o.score.join('') + 'A')
+function getCacheKey(char1, char2) {
+  return `${char1}${char2}`
 }
 
 function enterCdeOnFinalKeypad(code) {
@@ -234,6 +335,9 @@ function partOne(numbers) {
 function partTwo(numbers) {
   const ans = []
   const paths = {}
+
+  buildCache()
+
   for (const number of numbers) {
     console.log(`CONSIDERING ${number}`)
     const finalKeypad = enterCdeOnFinalKeypad(number)
@@ -241,7 +345,8 @@ function partTwo(numbers) {
     console.log(`To enter ${number} on the final keypad, we have ${finalKeypad.length} choices`)
 
     let pathsToTest = [...finalKeypad]
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 4; i++) {
+      console.log(`Trying ${i}`)
       let newPathsToTest = []
       let shortestSoFar = Infinity
 
@@ -249,7 +354,12 @@ function partTwo(numbers) {
         pathsToTest.sort((a, b) => b.length - a.length)
         const item = pathsToTest.shift()
 
-        const iterKeypad = enterCodeOnIntermidiateKeypad(item, false, shortestSoFar)
+        const iterKeypad = enterCodeOnIntermidiateKeypadTwo('A' + item, globalCache)
+        // globalCache[item] = iterKeypad
+        if (i > 0) {
+          newPathsToTest.push(iterKeypad[0])
+          continue
+        }
         newPathsToTest.push(...iterKeypad)
       }
       pathsToTest = [...newPathsToTest]
@@ -275,6 +385,7 @@ async function start() {
 
   // const task1 = await timeFunction(() => partOne(numbers))
   const task2 = await timeFunction(() => partTwo(numbers))
+  console.log(task2)
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
 
