@@ -1,5 +1,7 @@
 const { timeFunction, getInput, getAdjacent4 } = require('../common')
 
+const globalCache = {}
+
 function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infinity) {
   const chars = code.toString().split('')
 
@@ -43,11 +45,11 @@ function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infi
       paths.push(item)
       bestSoFar = Math.min(bestSoFar, item.score.length)
       if (allowSpace) {
-        return paths
+        return paths.map(o => o.score.join('') + 'A')
       }
     }
 
-    const dirs = minPath(grid, item.state.x, item.state.y, item.nextChar, allowSpace)
+    const dirs = minPath(grid, item.state.x, item.state.y, item.nextChar)
 
     dirs.forEach(o => queue.push({ fromChar: item.nextChar, fromCharIndex: item.nextCharIndex, nextChar: chars[item.nextCharIndex + 1], nextCharIndex: item.nextCharIndex + 1, state: o, path: [...item.path, ...o.path], score: [...item.score, 'A', ...o.score] }))
   }
@@ -205,8 +207,9 @@ function partOne(numbers) {
 
     let pathsAfterTwo = []
     let shortestSoFar = Infinity
-    for(const o of shortestPathsAfterOne) {
-      const iterKeypad = enterCodeOnIntermidiateKeypad(o, false)
+    for (const o of shortestPathsAfterOne) {
+      const iterKeypad = enterCodeOnIntermidiateKeypad(o, true, shortestSoFar)
+      if (!iterKeypad.length) continue
       //console.log(`To enter ${o} on the intermediate keypad, we need to enter:\n${iterKeypad.join('\n')}`)
       shortestSoFar = Math.min(shortestSoFar, ...iterKeypad.map(o => o.length))
       pathsAfterTwo.push(...iterKeypad)
@@ -229,13 +232,48 @@ function partOne(numbers) {
 }
 
 function partTwo(numbers) {
+  const ans = []
+  const paths = {}
+  for (const number of numbers) {
+    console.log(`CONSIDERING ${number}`)
+    const finalKeypad = enterCdeOnFinalKeypad(number)
+    //console.log(`To enter ${number} on the final keypad, we need to enter:\n${finalKeypad.join('\n')}`)
+    console.log(`To enter ${number} on the final keypad, we have ${finalKeypad.length} choices`)
 
+    let pathsToTest = [...finalKeypad]
+    for (let i = 0; i < 2; i++) {
+      let newPathsToTest = []
+      let shortestSoFar = Infinity
+
+      while (pathsToTest.length) {
+        pathsToTest.sort((a, b) => b.length - a.length)
+        const item = pathsToTest.shift()
+
+        const iterKeypad = enterCodeOnIntermidiateKeypad(item, false, shortestSoFar)
+        newPathsToTest.push(...iterKeypad)
+      }
+      pathsToTest = [...newPathsToTest]
+    }
+
+    const shortestOne = pathsToTest.reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
+    const shortestPathsAfterOne = pathsToTest.filter(o => o.length === shortestOne)
+
+    paths[number] = shortestPathsAfterOne
+
+    const numPart = Number(number.match(/(\d+)/)?.[1])
+    ans.push({ a: shortestPathsAfterOne[0].length, b: numPart, total: shortestPathsAfterOne[0].length * numPart })
+  }
+
+  const finalAns = ans.reduce((acc, curr) => acc + curr.total, 0)
+  console.log(JSON.stringify(ans))
+  console.log(finalAns)
+  return finalAns
 }
 
 async function start() {
   const numbers = getInput(`${__dirname}/input.txt`)
 
-  const task1 = await timeFunction(() => partOne(numbers))
+  // const task1 = await timeFunction(() => partOne(numbers))
   const task2 = await timeFunction(() => partTwo(numbers))
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
