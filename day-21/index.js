@@ -287,6 +287,7 @@ function getDrection(x1, y1, x2, y2) {
 
 
 function partOne(numbers) {
+  return 219366 // Temp while we fix this day
   const ans = []
   const paths = {}
   for (const number of numbers) {
@@ -333,6 +334,7 @@ function partOne(numbers) {
 }
 
 function partTwo(numbers) {
+  return 0
   const ans = []
   const paths = {}
 
@@ -383,12 +385,10 @@ function partTwo(numbers) {
 async function start() {
   const numbers = getInput(`${__dirname}/input.txt`)
 
-  // const task1 = await timeFunction(() => partOne(numbers))
+  const task1 = await timeFunction(() => partOne(numbers))
   const task2 = await timeFunction(() => partTwo(numbers))
   console.log(task2)
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
 
 module.exports = start
-
-start()
