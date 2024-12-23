@@ -1,6 +1,6 @@
 ## Advent of Code 2024
 
-![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-22-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-43-b5792a?style=for-the-badge)
+![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-23-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-45-b5792a?style=for-the-badge)
 
 My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
@@ -30,6 +30,7 @@ Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1399&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2097.412&nbsp;&nbsp;|994807&nbsp;&nbsp;&nbsp;&nbsp;|17878.355&nbsp;|19975.767&nbsp;
 21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|219366&nbsp;&nbsp;&nbsp;&nbsp;|0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|❌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|15006633487|88.935&nbsp;&nbsp;&nbsp;&nbsp;|1710&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6567.98&nbsp;&nbsp;&nbsp;|6656.915&nbsp;&nbsp;
+23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1352&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|22.344&nbsp;&nbsp;&nbsp;&nbsp;|dm,do,fr,gf,gh,gy,iq,jb,kt,on,rg,xf,ze|14.018&nbsp;&nbsp;&nbsp;&nbsp;|36.363&nbsp;&nbsp;&nbsp;&nbsp;
 
 <br />
 
