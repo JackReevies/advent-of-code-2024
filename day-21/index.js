@@ -387,7 +387,6 @@ async function start() {
 
   const task1 = await timeFunction(() => partOne(numbers))
   const task2 = await timeFunction(() => partTwo(numbers))
-  console.log(task2)
   return [{ ans: task1.result, ms: task1.ms }, { ans: task2.result, ms: task2.ms }]
 }
 
