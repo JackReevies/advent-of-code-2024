@@ -58,7 +58,7 @@ function partOne(numbers) {
 }
 
 function partTwo(numbers) {
-
+  return 0
 }
 
 async function start() {

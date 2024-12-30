@@ -1,6 +1,6 @@
 ## Advent of Code 2024
 
-![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-25-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-48-b5792a?style=for-the-badge)
+![](https://img.shields.io/badge/Language-JS-778528?style=for-the-badge) &nbsp; &nbsp; ![](https://img.shields.io/badge/📅%20Day%20-25-118499?style=for-the-badge) &nbsp; &nbsp;  ![](https://img.shields.io/badge/⭐%20Stars%20-50-b5792a?style=for-the-badge)
 
 My solutions to the [advent of code 2024](https://adventofcode.com/2024/)
 
@@ -28,11 +28,11 @@ Day | Task 1 | ᴍs | Task 2 | ᴍs | Total Time (ᴍs)
 18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|302&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|15.99&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|24,32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|30.364&nbsp;&nbsp;&nbsp;&nbsp;|46.354&nbsp;&nbsp;&nbsp;&nbsp;
 19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|365&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|110.353&nbsp;&nbsp;&nbsp;|730121486795169|324.583&nbsp;&nbsp;&nbsp;|434.936&nbsp;&nbsp;&nbsp;
 20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1399&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|2097.412&nbsp;&nbsp;|994807&nbsp;&nbsp;&nbsp;&nbsp;|17878.355&nbsp;|19975.767&nbsp;
-21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|219366&nbsp;&nbsp;&nbsp;&nbsp;|0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|❌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+21&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|219366&nbsp;&nbsp;&nbsp;&nbsp;|7.304&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|271631192020464|7.157&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|14.461&nbsp;&nbsp;&nbsp;&nbsp;
 22&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|15006633487|88.935&nbsp;&nbsp;&nbsp;&nbsp;|1710&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|6567.98&nbsp;&nbsp;&nbsp;|6656.915&nbsp;&nbsp;
 23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1352&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|22.344&nbsp;&nbsp;&nbsp;&nbsp;|dm,do,fr,gf,gh,gy,iq,jb,kt,on,rg,xf,ze|14.018&nbsp;&nbsp;&nbsp;&nbsp;|36.363&nbsp;&nbsp;&nbsp;&nbsp;
 24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|60614602965288|0.376&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|cgr,hpc,hwk,qmd,tnt,z06,z31,z37|0.248&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.624&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3201&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.291&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|❌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.291&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|3201&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.308&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|0.001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1.308&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <br />
 

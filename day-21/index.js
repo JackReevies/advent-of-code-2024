@@ -1,6 +1,7 @@
 const { timeFunction, getInput, getAdjacent4 } = require('../common')
 
 const globalCache = {}
+const cacheSteps = {}
 
 function buildCache() {
   const grid = [
@@ -68,98 +69,12 @@ function buildCache() {
     }
   }
 }
-function enterCodeOnIntermidiateKeypadTwo(partialCode, cache = {}) {
-  if (partialCode === "") {
-    return 1
-  } else if (cache[partialCode]) {
-    return cache[partialCode]
-  }
-
-  let path = enterCodeOnIntermidiateKeypadTwo(partialCode.substring(1), cache)
-  const prefix = cache[`${partialCode[0]}${partialCode[1]}`]
-
-  for (const o of path) {
-    if (!cache[partialCode]) {
-      cache[partialCode] = []
-    }
-
-    for (const p of prefix) {
-      cache[partialCode].push(`${p}${o}`)
-    }
-  }
-
-  // Trim cache - only keep the shrotest routes
-  const shortes = Object.values(cache[partialCode]).reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
-  Object.values(cache[partialCode]).forEach(o => {
-    if (o.length !== shortes) {
-      delete cache[partialCode][o]
-    }
-  })
-
-  return cache[partialCode]
-}
-
-function enterCodeOnIntermidiateKeypad(code, allowSpace = false, shortest = Infinity) {
-  const chars = code.toString().split('')
-
-  /*
-
-    +---+---+
-    | ^ | A |
-+---+---+---+
-| < | v | > |
-+---+---+---+
-
-  */
-
-  const grid = [
-    [' ', '^', 'A'],
-    ['<', 'v', '>']
-  ]
-
-  let path = []
-  let paths = {}
-
-  let x = 2
-  let y = 0
-
-  let queue = []
-
-  const res = globalCache[`A-${chars[0]}`]
-
-  res.forEach(o => queue.push({ fromChar: chars[0], fromCharIndex: 0, nextChar: chars[1], nextCharIndex: 1, state: o, score: [...o] }))
-  let bestSoFar = shortest
-  while (queue.length) {
-    queue.sort((a, b) => b.fromCharIndex - a.fromCharIndex)
-    const item = queue.shift()
-
-    if (item.score.length > bestSoFar) {
-      continue
-    }
-
-    if (!item.nextChar) {
-      // Finished
-      paths[item.score.join('')] = item.score.length
-      bestSoFar = Math.min(bestSoFar, item.score.length)
-      if (allowSpace) {
-        return paths.map(o => o.score.join('') + 'A')
-      }
-      continue
-    }
-
-    const dirs = globalCache[getCacheKey(item.fromChar, item.nextChar)] // minPath(grid, item.state.x, item.state.y, item.nextChar)
-
-    dirs.forEach(o => queue.push({ fromChar: item.nextChar, fromCharIndex: item.nextCharIndex, nextChar: chars[item.nextCharIndex + 1], nextCharIndex: item.nextCharIndex + 1, score: [...item.score, ...o] }))
-  }
-
-  return Object.keys(paths).filter(o => paths[o] === bestSoFar)
-}
 
 function getCacheKey(char1, char2) {
   return `${char1}${char2}`
 }
 
-function enterCdeOnFinalKeypad(code) {
+function enterCodeOnFinalKeypad(code) {
   const chars = code.toString().split('')
 
   /*
@@ -183,7 +98,6 @@ function enterCdeOnFinalKeypad(code) {
     [' ', '0', 'A']
   ]
 
-  let path = []
   let paths = []
 
   let x = 2
@@ -212,20 +126,8 @@ function enterCdeOnFinalKeypad(code) {
   return paths.map(o => o.score.join('') + 'A')
 }
 
-function getCoord(grid, char = 'S') {
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === char) {
-        return { x: j, y: i }
-      }
-    }
-  }
-}
-
 function minPath(grid, x, y, target, allowSpace = false) {
-  const targetCoord = getCoord(grid, target)
   const cells = [{ x: x, y: y, direction: '>', path: [{ x: x, y: y }], score: [] }]
-  const cache = {}
   const options = []
   let bestSoFar = Infinity
 
@@ -285,105 +187,60 @@ function getDrection(x1, y1, x2, y2) {
   }
 }
 
-
 function partOne(numbers) {
-  return 219366 // Temp while we fix this day
-  const ans = []
-  const paths = {}
-  for (const number of numbers) {
-    console.log(`CONSIDERING ${number}`)
-    const finalKeypad = enterCdeOnFinalKeypad(number)
-    //console.log(`To enter ${number} on the final keypad, we need to enter:\n${finalKeypad.join('\n')}`)
-    console.log(`To enter ${number} on the final keypad, we have ${finalKeypad.length} choices`)
+  return numbers.reduce((acc, curr) => acc + doForCode(curr, 2), 0)
+}
 
-    let pathsAfterOne = []
-    for (const o of finalKeypad) {
-      const iterKeypad = enterCodeOnIntermidiateKeypad(o)
-      //console.log(`To enter ${o} on the final keypad, we need to enter:\n${iterKeypad.join('\n')}`)
-      console.log(`To enter ${o} on the final keypad, we have ${iterKeypad.length} choices`)
-      pathsAfterOne.push(...iterKeypad)
+function doForCode(code, levels) {
+  const firstLevelCodes = enterCodeOnFinalKeypad(code)
+  let minLength = Number.MAX_VALUE
+
+  for (const code of firstLevelCodes) {
+    const split = code.split('A').filter(o => o).map(o => `${o}A`)
+
+    const length = split.reduce((acc, curr) => acc + getShortestForPartial(curr, levels), 0)
+    if (length < minLength) {
+      minLength = length
     }
-
-    const shortestOne = pathsAfterOne.reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
-    const shortestPathsAfterOne = pathsAfterOne.filter(o => o.length === shortestOne)
-
-    let pathsAfterTwo = []
-    let shortestSoFar = Infinity
-    for (const o of shortestPathsAfterOne) {
-      const iterKeypad = enterCodeOnIntermidiateKeypad(o, true, shortestSoFar)
-      if (!iterKeypad.length) continue
-      //console.log(`To enter ${o} on the intermediate keypad, we need to enter:\n${iterKeypad.join('\n')}`)
-      shortestSoFar = Math.min(shortestSoFar, ...iterKeypad.map(o => o.length))
-      pathsAfterTwo.push(...iterKeypad)
-      console.log(`To enter ${o} on the final keypad, we have ${iterKeypad.length} choices. Shortest is ${shortestSoFar}`)
-    }
-
-    const shortestTwo = pathsAfterTwo.reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
-    const shortestPathsAfterTwo = pathsAfterTwo.filter(o => o.length === shortestTwo)
-
-    paths[number] = shortestPathsAfterTwo
-
-    const numPart = Number(number.match(/(\d+)/)?.[1])
-    ans.push({ a: shortestPathsAfterTwo[0].length, b: numPart, total: shortestPathsAfterTwo[0].length * numPart })
   }
 
-  const finalAns = ans.reduce((acc, curr) => acc + curr.total, 0)
-  console.log(JSON.stringify(ans))
-  console.log(finalAns)
-  return finalAns
+  return Number(code.match(/(\d+)/)?.[1]) * minLength
+}
+
+function getShortestForPartial(sub, level) {
+  if (level == 0) { return sub.length }
+
+  if (!cacheSteps[level]) {
+    cacheSteps[level] = {}
+  }
+
+  if (cacheSteps[level][sub]) {
+    return cacheSteps[level][sub]
+  }
+
+  let length = 0
+
+  for (let i = 0; i < sub.length; i++) {
+    const dest = sub[i]
+    const prev = sub[i - 1] || 'A' // Always start with A
+    const newToken = globalCache[getCacheKey(prev, dest)]
+
+    const shortest = Math.min(...newToken.map(o => getShortestForPartial(o, level - 1)))
+
+    length += shortest
+  }
+
+  cacheSteps[level][sub] = length
+  return length
 }
 
 function partTwo(numbers) {
-  return 0
-  const ans = []
-  const paths = {}
-
-  buildCache()
-
-  for (const number of numbers) {
-    console.log(`CONSIDERING ${number}`)
-    const finalKeypad = enterCdeOnFinalKeypad(number)
-    //console.log(`To enter ${number} on the final keypad, we need to enter:\n${finalKeypad.join('\n')}`)
-    console.log(`To enter ${number} on the final keypad, we have ${finalKeypad.length} choices`)
-
-    let pathsToTest = [...finalKeypad]
-    for (let i = 0; i < 4; i++) {
-      console.log(`Trying ${i}`)
-      let newPathsToTest = []
-      let shortestSoFar = Infinity
-
-      while (pathsToTest.length) {
-        pathsToTest.sort((a, b) => b.length - a.length)
-        const item = pathsToTest.shift()
-
-        const iterKeypad = enterCodeOnIntermidiateKeypadTwo('A' + item, globalCache)
-        // globalCache[item] = iterKeypad
-        if (i > 0) {
-          newPathsToTest.push(iterKeypad[0])
-          continue
-        }
-        newPathsToTest.push(...iterKeypad)
-      }
-      pathsToTest = [...newPathsToTest]
-    }
-
-    const shortestOne = pathsToTest.reduce((acc, curr) => Math.min(acc, curr.length), Infinity)
-    const shortestPathsAfterOne = pathsToTest.filter(o => o.length === shortestOne)
-
-    paths[number] = shortestPathsAfterOne
-
-    const numPart = Number(number.match(/(\d+)/)?.[1])
-    ans.push({ a: shortestPathsAfterOne[0].length, b: numPart, total: shortestPathsAfterOne[0].length * numPart })
-  }
-
-  const finalAns = ans.reduce((acc, curr) => acc + curr.total, 0)
-  console.log(JSON.stringify(ans))
-  console.log(finalAns)
-  return finalAns
+  return numbers.reduce((acc, curr) => acc + doForCode(curr, 25), 0)
 }
 
 async function start() {
   const numbers = getInput(`${__dirname}/input.txt`)
+  buildCache()
 
   const task1 = await timeFunction(() => partOne(numbers))
   const task2 = await timeFunction(() => partTwo(numbers))
